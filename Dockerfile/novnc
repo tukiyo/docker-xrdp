@@ -1,0 +1,69 @@
+FROM tukiyo3/xrdp:chrome
+
+RUN pkgadd.sh \
+	novnc \
+	net-tools \
+	x11vnc \
+	xfonts-base
+
+# x11vnc
+RUN { \
+	echo "[program:x11vnc]"; \
+	echo "priority=10"; \
+	echo "command=/usr/bin/x11vnc -shared"; \
+	echo "autorestart=true"; \
+	echo "user=focal"; \
+    } > /etc/supervisor/conf.d/x11vnc.conf
+
+# novnc
+RUN { \
+	echo "[program:novnc]"; \
+	echo "priority=20"; \
+	echo "command=/usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080"; \
+	echo "autorestart=true"; \
+    } > /etc/supervisor/conf.d/novnc.conf
+
+RUN pkgadd.sh \
+	xvfb
+
+# xvfb
+RUN { \
+	echo "[program:xvfb]"; \
+	echo "priority=10"; \
+	echo "command=/usr/bin/Xvfb :0 -screen 0 1280x920x16"; \
+	echo "autorestart=true"; \
+	echo "user=focal"; \
+    } > /etc/supervisor/conf.d/xvfb.conf
+
+RUN pkgadd.sh \
+	xfce4-terminal
+
+# startup
+RUN { \
+	echo "[program:openbox]"; \
+	echo "priority=30"; \
+	echo "command=env DISPLAY=:0 HOME=/home/focal openbox-session"; \
+	echo "autorestart=true"; \
+	echo "user=focal"; \
+    } > /etc/supervisor/conf.d/openbox.conf
+
+RUN { \
+	echo "export LANG=ja_JP.UTF-8"; \
+	echo "dconf write /desktop/ibus/general/preload-engines \"['mozc-jp']\""; \
+	echo "export GTK_IM_MODULE=ibus XMODIFIERS=@im=ibus QT_IM_MODULE=ibus"; \
+	echo "ibus-daemon -d"; \
+	echo 'xfce4-terminal &'; \
+	echo 'google-chrome --make-default-browser'; \
+	#echo 'google-chrome --start-maximized --incognito &'; \
+	# incognito: シークレットモード
+	# start-maximized: 起動時最大化
+	# 落ちても自動で再起動
+	echo 'while true; do google-chrome --start-maximized --incognito; done'; \
+    } > /etc/skel/.config/openbox/autostart
+
+# hide control bar
+RUN echo "<style>#noVNC_control_bar { display: none; }</style>" >> /usr/share/novnc/vnc.html \
+ && echo "<style>#noVNC_status_bar { display: none; }</style>" >> /usr/share/novnc/vnc_lite.html \
+ && ln -s /usr/share/novnc/vnc_auto.html /usr/share/novnc/index.html
+
+EXPOSE 6080

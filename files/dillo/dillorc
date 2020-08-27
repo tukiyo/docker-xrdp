@@ -1,0 +1,47 @@
+## see: http://www.dillo.org/dillorc
+
+## 検索エンジン。設定しないと文字化ける
+search_url="Google http://www.google.com/search?ie=UTF-8&oe=UTF-8&gbv=1&q=%s"
+search_url="Qiita https://qiita.com/search?q=%s"
+search_url="Twitter https://mobile.twitter.com/search?q=%s"
+search_url="DeepL https://www.linguee.com/english-japanese/search?source=auto&query=%s"
+search_url="Google image https://www.google.com/images?ie=UTF-8&oe=UTF-8&as_q=%s"
+search_url="wikipedia https://ja.wikipedia.org/wiki/%s"
+
+start_page="http://www.google.com/search?ie=UTF-8&oe=UTF-8&gbv=1&q= "
+home="http://www.google.com/search?ie=UTF-8&oe=UTF-8&gbv=1&q= "
+filter_auto_requests=allow_all 
+
+## メニューバーのサイズ
+panel_size=tiny
+
+## フルスクリーン起動
+fullwindow_start=YES
+
+## フォント設定
+font_serif="VL Gothic"
+font_sans_serif="VL Gothic"
+font_cursive="VL Gothic"
+font_fantasy="VL Gothic"
+font_monospace="VL Gothic"
+
+font_min_size=11
+
+## proxy
+# http_proxy="http://127.0.0.1:8080/"
+
+save_dir=/tmp/
+
+# font zoom
+font_factor=1.2
+
+limit_text_width=YES
+
+bg_color=0xEEEEEE
+allow_white_bg=NO
+white_bg_replacement=0xEEEEEE
+
+## 
+geometry=1024x768
+
+http_language="ja"

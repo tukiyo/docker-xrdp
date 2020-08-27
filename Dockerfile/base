@@ -1,0 +1,55 @@
+FROM tukiyo3/xrdp:core
+
+# busybox
+RUN pkgadd.sh busybox && busybox --install
+# 容量が小さいので追加しておく
+RUN pkgadd.sh \
+      ca-certificates \
+      curl \
+      xfce4-terminal \
+      dillo \
+      obconf \
+      cron \
+      nkf \
+      screen \
+      logrotate \
+      ssh \
+      autossh \
+      ranger \
+      rdesktop \
+      vim-gtk3 \
+      tig \
+      remmina remmina-plugin-vnc
+#RUN pkgadd.sh tint2
+
+# vim
+RUN ln -f /usr/bin/vim /usr/bin/vi \
+ && echo "colorscheme desert" > /etc/skel/.gvimrc
+ENV EDITOR=vim
+
+# dillo
+RUN mkdir -p /etc/skel/.dillo/
+COPY files/dillo/dillorc /etc/skel/.dillo/dillorc
+COPY files/dillo/keysrc /etc/skel/.dillo/keysrc
+
+# cron
+RUN { \
+      echo "[program:cron]"; \
+      echo "command=/usr/sbin/cron -f"; \
+    } > /etc/supervisor/conf.d/crond.conf
+
+# sshd
+RUN { \
+      echo "[program:sshd]"; \
+      echo "command=/usr/sbin/sshd -D"; \
+    } > /etc/supervisor/conf.d/sshd.conf
+RUN \
+    # sshdは鍵認証を必須に
+    sed -i -e "s/^#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config \
+ && mkdir /run/sshd
+
+
+# skel
+RUN cd /etc/skel && mkdir Downloads Documents Pictures Desktop tmp bin cron
+
+EXPOSE 22

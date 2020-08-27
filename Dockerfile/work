@@ -1,0 +1,42 @@
+FROM tukiyo3/xrdp:xfce4
+
+# Chromeの利用には --cap-add SYS_ADMIN と -v /dev/shm:/dev/shm オプションが必要
+RUN pkgadd.sh \
+	ca-certificates \
+	fonts-liberation \
+	libappindicator3-1 \
+	libnspr4 \
+	libnss3 \
+	libxss1 \
+	wget \
+	xdg-utils \
+	libasound2 \
+	libxtst6
+RUN wget -q "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
+ && dpkg -i google-chrome-stable_current_amd64.deb \
+ && rm -f google-chrome-stable_current_amd64.deb \
+ && rm -f "/etc/apt/sources.list.d/google-chrome.list"
+
+RUN mkdir -p /etc/skel/.config/openbox
+RUN { \
+	echo 'google-chrome --make-default-browser'; \
+	echo 'google-chrome --start-maximized --incognito &'; \
+    } > /etc/skel/.config/openbox/autostart
+
+
+# work
+RUN pkgadd.sh \
+	thunderbird \
+	thunderbird-locale-ja \
+	freerdp2-x11 rdesktop xtightvncviewer \
+	screen vim-gtk autossh curl \
+	tig expect ranger w3m nkf \
+	mutt mailutils tightvncserver \
+	cifs-utils \
+	pinta \
+	unar
+# work
+RUN pkgadd.sh \
+	psmisc
+
+RUN apt update

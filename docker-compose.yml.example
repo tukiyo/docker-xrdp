@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+
+  xrdp:
+    image: tukiyo3/xrdp
+    restart: always
+    hostname: xrdp
+    container_name: xrdp
+    volumes:
+      - ../docker-xrdp-home:/home
+      # chrome
+      - /dev/shm:/dev/shm
+      # clipbard
+      - /dev/fuse:/dev/fuse
+    cap_add:
+      - ALL
+      # # chrome
+      # - SYS_ADMIN
+      # # smbclient
+      # - DAC_READ_SEARCH
+    user: "1000:1000"
+    ports:
+      # xrdp
+      - "3389:3389"
+      # sshd
+      - "10022:22"
+    environment:
+      GITHUB_USER: tukiyo
+      USER: focal
+      PASSWD: "[focal@202008]"
