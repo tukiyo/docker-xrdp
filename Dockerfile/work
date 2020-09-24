@@ -36,7 +36,7 @@ RUN pkgadd.sh \
 	pinta \
 	unar
 # work
-RUN pkgadd.sh \
-	psmisc
+RUN pkgadd.sh psmisc iputils-ping telnet pinta xfce4-screenshooter
+RUN pkgadd.sh tig thunderbird thunderbird-locale-ja firefox firefox-locale-ja
 
 RUN apt update
