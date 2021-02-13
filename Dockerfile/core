@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM arm64v8/ubuntu:20.04
 
 MAINTAINER tukiyo3 <tukiyo3@gmail.com>
 
