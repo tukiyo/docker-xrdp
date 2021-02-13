@@ -1,6 +1,6 @@
 FROM tukiyo3/xrdp-aarch64:xfce4
 
-# Chromeの利用には --cap-add SYS_ADMIN と -v /dev/shm:/dev/shm オプションが必要
+# chromiumの利用には --cap-add SYS_ADMIN と -v /dev/shm:/dev/shm オプションが必要
 RUN pkgadd.sh \
 	ca-certificates \
 	fonts-liberation \
@@ -12,15 +12,10 @@ RUN pkgadd.sh \
 	xdg-utils \
 	libasound2 \
 	libxtst6
-RUN wget -q "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
- && dpkg -i google-chrome-stable_current_amd64.deb \
- && rm -f google-chrome-stable_current_amd64.deb \
- && rm -f "/etc/apt/sources.list.d/google-chrome.list"
 
 RUN mkdir -p /etc/skel/.config/openbox
 RUN { \
-	echo 'google-chrome --make-default-browser'; \
-	echo 'google-chrome --start-maximized --incognito &'; \
+	echo 'xfce4-session'; \
     } > /etc/skel/.config/openbox/autostart
 
 
