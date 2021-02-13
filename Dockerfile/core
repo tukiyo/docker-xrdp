@@ -48,7 +48,8 @@ RUN \
 	&& chmod u+s /usr/sbin/useradd /usr/sbin/groupadd
 
 # 日本語フォント
-RUN pkgadd.sh fonts-vlgothic
+#RUN pkgadd.sh fonts-vlgothic
+RUN pkgadd.sh fonts-ricty-diminished
 
 # xrdpの接続に必要
 RUN install -o root -g xrdp -m 0775 -d /var/run/xrdp /var/run/dbus \
