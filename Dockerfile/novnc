@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp:chrome
+FROM tukiyo3/xrdp-aarch64:chrome
 
 RUN pkgadd.sh \
 	novnc \

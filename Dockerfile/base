@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp:core
+FROM tukiyo3/xrdp-aarch64:core
 
 # busybox
 RUN pkgadd.sh busybox && busybox --install

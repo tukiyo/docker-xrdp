@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp:xfce4
+FROM tukiyo3/xrdp-aarch64:xfce4
 
 # Chromeの利用には --cap-add SYS_ADMIN と -v /dev/shm:/dev/shm オプションが必要
 RUN pkgadd.sh \

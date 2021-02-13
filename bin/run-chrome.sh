@@ -16,4 +16,4 @@ docker run -it -d \
  -v /dev/fuse:/dev/fuse \
  -p 3389:3389 \
  -p 10022:22 \
- tukiyo3/xrdp:chrome
+ tukiyo3/xrdp-aarch64:chrome

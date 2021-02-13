@@ -5,7 +5,7 @@ _build() {
 	if [ $# -eq 2 ];then
 		TAG=$2
 	fi
-	docker build . --no-cache=false -f Dockerfile/${1} -t tukiyo3/xrdp:${TAG}
+	docker build . --no-cache=false -f Dockerfile/${1} -t tukiyo3/xrdp-aarch64:${TAG}
 }
 
 _build core
