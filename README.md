@@ -3,18 +3,35 @@
 * [Dockerhub](https://hub.docker.com/repository/docker/tukiyo3/xrdp)
 * [Github](https://github.com/tukiyo/docker-xrdp)
 
+## 特徴
+
+* Xfce4 の環境で日本語入力可能
+* Raspberry Pi 3 以降の64bit版も用意
+
+
 ## 使い方
 
 ```sh
-# openbox
-docker run -p 3389:3389 tukiyo3/xrdp:core
+# x86_64版
+docker run \
+ -p 3389:3389 \
+ tukiyo3/xrdp-x86_64
 ```
 
-or
 
+```sh
+# aarch64版 (x86_64環境では動きません！)
+docker run \
+ -p 3389:3389 \
+ tukiyo3/xrdp-aarch64
 ```
-# google-chrome
-docker run -p 3389:3389 --cap-add SYS_ADMIN -v /dev/shm:/dev/shm tukiyo3/xrdp:chrome
+
+```sh
+# cap-add は chrome や firefoxに必要 (無いとブラウザが落ちやすい)
+docker run -p 3389:3389 \
+ --cap-add SYS_ADMIN \
+ -v /dev/shm:/dev/shm \
+ tukiyo3/xrdp-x86_64
 ```
 
 | 項目 | 初期値 | 備考 |
@@ -33,7 +50,7 @@ docker run -it --rm \
     -e USER=user1 \
     -e PASSWD=hogehoge \
     -p 3389:3389 \
-  tukiyo3/xrdp:lxde
+  tukiyo3/xrdp-x86_64
 ```
 
 引数
