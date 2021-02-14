@@ -2,7 +2,8 @@ version: '3.8'
 services:
 
   xrdp:
-    image: tukiyo3/xrdp
+    #image: tukiyo3/xrdp-aarch
+    image: tukiyo3/xrdp-x86_64
     restart: always
     hostname: xrdp
     container_name: xrdp
@@ -27,4 +28,4 @@ services:
     environment:
       GITHUB_USER: tukiyo
       USER: focal
-      PASSWD: "[focal@202008]"
+      PASSWD: "[focal@202102]"

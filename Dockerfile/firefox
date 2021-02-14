@@ -1,7 +1,0 @@
-FROM tukiyo3/xrdp-aarch64:core
-
-# Firefoxの利用には -v /dev/shm:/dev/shm オプションが必要
-RUN pkgadd.sh \
-	firefox firefox-locale-ja
-
-RUN echo "firefox" >> /etc/skel/.config/openbox/autostart

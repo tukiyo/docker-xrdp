@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp-aarch64:chrome
+FROM tukiyo3/xrdp-x86_64:latest
 
 RUN pkgadd.sh \
 	novnc \
@@ -53,12 +53,8 @@ RUN { \
 	echo "export GTK_IM_MODULE=ibus XMODIFIERS=@im=ibus QT_IM_MODULE=ibus"; \
 	echo "ibus-daemon -d"; \
 	echo 'xfce4-terminal &'; \
-	echo 'google-chrome --make-default-browser'; \
-	#echo 'google-chrome --start-maximized --incognito &'; \
-	# incognito: シークレットモード
-	# start-maximized: 起動時最大化
-	# 落ちても自動で再起動
-	echo 'while true; do google-chrome --start-maximized --incognito; done'; \
+	echo 'firefox'; \
+	echo 'while true; do firefox; done'; \
     } > /etc/skel/.config/openbox/autostart
 
 # hide control bar

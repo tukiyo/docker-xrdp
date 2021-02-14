@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu:20.04
+FROM arm64v8/ubuntu:21.04
 
 MAINTAINER tukiyo3 <tukiyo3@gmail.com>
 
@@ -26,6 +26,8 @@ RUN pkgadd.sh \
 	xrdp \
 	xorgxrdp \
 	dbus-x11 \
+	# Githubの公開鍵をダウンロード用
+	curl \
 	# 軽めのWM
 	openbox
 
@@ -48,7 +50,6 @@ RUN \
 	&& chmod u+s /usr/sbin/useradd /usr/sbin/groupadd
 
 # 日本語フォント
-#RUN pkgadd.sh fonts-vlgothic
 RUN pkgadd.sh fonts-ricty-diminished
 
 # xrdpの接続に必要
@@ -100,7 +101,7 @@ RUN cd /etc/skel \
 	&& touch /etc/skel/.config/openbox/autostart
 
 # コンテナ起動時のスクリプト
-COPY entrypoint.sh /usr/local/bin/
+COPY Dockerfile/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 

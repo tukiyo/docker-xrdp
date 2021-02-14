@@ -16,22 +16,24 @@ docker run -it -d \
  -v /dev/shm:/dev/shm \
  -p 13389:3389 \
  -p 10022:22 \
- tukiyo3/xrdp:chrome
+ tukiyo3/xrdp-$(uname -m):latest
 EOF
 }
 
 _add_authorized_keys() {
-	if [ "${2}" = "" ];then
+	USER="${1}"
+	GITHUB_USER="${2}"
+	if [ "${GITHUB_USER}" = "" ];then
 		return
 	fi
-	if [ -e /home/${1}/.ssh ];then
-		echo "[skip] /home/${1}/.ssh already exists."
+	if [ -e /home/${USER}/.ssh ];then
+		echo "[skip] /home/${USER}/.ssh already exists."
 		return
 	fi
-	mkdir -p /home/${1}/.ssh
-	/usr/bin/wget -q "https://github.com/${2}.keys" -O /home/${1}/.ssh/authorized_keys
-	chmod 400 /home/${1}/.ssh/authorized_keys
-	chown ${1} /home/${1}/.ssh/authorized_keys
+	mkdir -p /home/${USER}/.ssh
+	/usr/bin/curl -o /home/${USER}/.ssh/authorized_keys "https://github.com/${GITHUB_USER}.keys"
+	chmod 400 /home/${USER}/.ssh/authorized_keys
+	chown ${USER} /home/${USER}/.ssh/authorized_keys
 	echo "    ssh ${USER}@localhost -p 10022"
 }
 _lenB() {
@@ -112,7 +114,7 @@ if [ $# -eq 0 ]; then
 fi
 unset PASSWD
 
-# fix: google-chrome
+# chromeの起動に必要
 sudo chmod 1777 /dev/shm
 
 echo "------------------------------------------------------------"

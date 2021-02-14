@@ -5,4 +5,4 @@ docker run \
  -p 127.0.0.1:6080:6080 \
  --cap-add SYS_ADMIN \
  -v /dev/shm:/dev/shm \
- tukiyo3/xrdp-aarch64:novnc
+ tukiyo3/xrdp-$(uname -m):novnc

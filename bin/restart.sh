@@ -1,11 +1,11 @@
 docker stop xrdp
 docker rm xrdp
 
-#TAG="icewm"
-#TAG="xfce4"
-#TAG="lxde"
-#TAG="latest"
-TAG="core"
+# TAG="icewm"
+# TAG="xfce4"
+# TAG="lxde"
+# TAG="core"
+TAG="latest"
 
 # SYS_ADMIN : chrome 使用時に必要
 # DAC_READ_SEARCH : smbmount 使用時に必要
@@ -22,9 +22,9 @@ docker run -it \
     -e USER=$USER \
     -e PASSWD=$PASS \
     -v /dev/shm:/dev/shm \
-    -p 9101:3389 \
-    -p 9102:22 \
-  tukiyo3/xrdp:$TAG
+    -p 3389:3389 \
+    -p 10022:22 \
+  tukiyo3/xrdp-$(uname -m):$TAG
   #yama07/docker-ubuntu-lxde:ubuntu18.04_ja_pulseaudio
 
 #   -u $(id -u):$(id -g) \
@@ -41,4 +41,4 @@ docker logs xrdp
 #     -e PASSWD=hogehoge \
 #     -v /dev/shm:/dev/shm \
 #     -p 3389:3389 \
-#   tukiyo3/xrdp:$TAG
+#   tukiyo3/xrdp-$(uname -m):$TAG
