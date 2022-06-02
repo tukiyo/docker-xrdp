@@ -8,7 +8,7 @@ services:
     hostname: xrdp
     container_name: xrdp
     volumes:
-      - ../docker-xrdp-home:/home
+      # - ./host/:/host/
       # chrome
       - /dev/shm:/dev/shm
       # clipbard
@@ -27,5 +27,5 @@ services:
       - "10022:22"
     environment:
       GITHUB_USER: tukiyo
-      USER: focal
-      PASSWD: "[focal@202102]"
+      USER: ubuntu
+      PASSWD: "[ubuntu@202206]"

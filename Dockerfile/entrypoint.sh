@@ -99,11 +99,11 @@ if [ $# -eq 0 ]; then
     fi
 
     # supervisord の起動
-    set -- /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+    set -- sudo /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
-    if [ ! -e /usr/local/bin/_gosu ]; then
-        sudo install -g $GROUP_ID -m 4750 $(which gosu) /usr/local/bin/_gosu
-        set -- /usr/local/bin/_gosu root "$@"
+    # 任意のセットアッププログラム
+    if [ -f /host/init.sh ]; then
+        sh /host/init.sh
     fi
 
     # 起動方法を表示

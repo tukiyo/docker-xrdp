@@ -12,7 +12,7 @@ RUN { \
 	echo "priority=10"; \
 	echo "command=/usr/bin/x11vnc -shared"; \
 	echo "autorestart=true"; \
-	echo "user=focal"; \
+	echo "user=ubuntu"; \
     } > /etc/supervisor/conf.d/x11vnc.conf
 
 # novnc
@@ -32,7 +32,7 @@ RUN { \
 	echo "priority=10"; \
 	echo "command=/usr/bin/Xvfb :0 -screen 0 1280x920x16"; \
 	echo "autorestart=true"; \
-	echo "user=focal"; \
+	echo "user=ubuntu"; \
     } > /etc/supervisor/conf.d/xvfb.conf
 
 RUN pkgadd.sh \
@@ -42,9 +42,9 @@ RUN pkgadd.sh \
 RUN { \
 	echo "[program:openbox]"; \
 	echo "priority=30"; \
-	echo "command=env DISPLAY=:0 HOME=/home/focal openbox-session"; \
+	echo "command=env DISPLAY=:0 HOME=/home/ubuntu openbox-session"; \
 	echo "autorestart=true"; \
-	echo "user=focal"; \
+	echo "user=ubuntu"; \
     } > /etc/supervisor/conf.d/openbox.conf
 
 RUN { \

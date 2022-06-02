@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:22.04
 
 MAINTAINER tukiyo3 <tukiyo3@gmail.com>
 
@@ -38,6 +38,7 @@ RUN \
 	&& locale-gen ja_JP.UTF-8 \
 	&& echo "LC_ALL=ja_JP.UTF-8\nLANG=ja_JP.UTF-8" > /etc/default/locale \
 	# timezone
+	&& pkgadd.sh tzdata \
 	&& cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
 	&& echo "Asia/Tokyo" > /etc/timezone \
 	\

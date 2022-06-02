@@ -38,7 +38,7 @@ docker run -p 3389:3389 \
 |:--|:--|:--|
 | UID | 1000 |
 | GID | 1000 |
-| USER | focal |
+| USER | ubuntu |
 | PASSWD | 自動生成 |
 
 ### アカウント指定
