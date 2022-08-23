@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 MAINTAINER tukiyo3 <tukiyo3@gmail.com>
 
 # パッケージインストール用 (コンテナサイズを小さく保つ)
+RUN sed -i -e 's/archive/jp.archive/g' /etc/apt/sources.list
 RUN { \
 	echo " apt update \\"; \
 	# 容量を抑えるための --no-install-recommends オプション
