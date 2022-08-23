@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp-x86_64:core
+FROM tukiyo3/xrdp:core
 
 # LXDE
 RUN pkgadd.sh lxde-core openbox-lxde-session lxterminal
