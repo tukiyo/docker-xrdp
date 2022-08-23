@@ -1,4 +1,4 @@
-FROM tukiyo3/xrdp-x86_64:latest
+FROM tukiyo3/xrdp:latest
 
 RUN pkgadd.sh \
 	novnc \
