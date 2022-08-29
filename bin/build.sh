@@ -11,7 +11,7 @@ _build() {
 	docker build . \
 	  --no-cache=false \
 	  -f Dockerfile/${ARCH}/${TAG} \
-	  -t tukiyo3/xrdp-${ARCH}:${TAG}
+	  -t tukiyo3/xrdp:${TAG}
 }
 
 _build core
