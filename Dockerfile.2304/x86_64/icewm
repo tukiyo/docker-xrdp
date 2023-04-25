@@ -1,5 +1,0 @@
-FROM tukiyo3/xrdp:core
-
-# icewm
-RUN pkgadd.sh icewm
-RUN sed -i -e 's/openbox-session/icewm/g' /etc/skel/.xsession
